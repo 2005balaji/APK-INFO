@@ -10,11 +10,10 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
 
   fs.writeFileSync("apk.txt", res);
 
-  var txt = res;
+  var data = res;
 
-  let data = txt;
 
-  {
+  function AppName() {
     let startIndex = data.indexOf("label=") + 7;
 
     let endIndex = data.indexOf("'icon='");
@@ -27,7 +26,8 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  {
+  
+  function MinSDKVersion() {
     let startIndex = data.indexOf("sdkVersion:'") + 13;
 
     let endIndex = data.indexOf("'targetSdkVersion:");
@@ -40,7 +40,7 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  {
+  function versionName() {
     let startIndex = data.indexOf("versionName='") + 13;
 
     let endIndex = data.indexOf("'platformBuildV");
@@ -53,7 +53,7 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  {
+  function versionCode() {
     let startIndex = data.indexOf("'versionCode='") + 14;
 
     let endIndex = data.indexOf("'versionName");
@@ -66,7 +66,7 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  {
+  function PackageName() {
     let startIndex = data.indexOf("package:name='") + 14;
 
     let endIndex = data.indexOf("'versionCode");
@@ -79,7 +79,7 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  {
+  function TargetSdkVersion() {
     let startIndex = data.indexOf("targetSdkVersion:'") + 18;
 
     let endIndex = data.indexOf("'uses-permis");
@@ -92,7 +92,7 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  {
+  function SupportScreensizes() {
     let startIndex = data.indexOf("supports-screens:") + 17;
 
     let endIndex = data.indexOf("supports-any-");
@@ -105,7 +105,7 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  {
+  function SupportedScreenDensities() {
     let startIndex = data.indexOf("u'densities:'") + 17;
 
     let endIndex = data.indexOf("textended");
@@ -118,7 +118,7 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  {
+  function Features() {
     let startIndex = data.indexOf("feature-group:label=''") + 22;
 
     let endIndex = data.indexOf("other-activities");
@@ -147,15 +147,14 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  /// executing shell commands
-
-  {
+  function Permissions() {
     exec("cd uploads && ./aapt2 dump permissions test.apk ", (a, values, c) => {
       console.log("Permissions : " + values);
+      Languages()
     });
   }
 
-  {
+  function Languages() {
     let startIndex = data.indexOf("locales:") + 8;
 
     let endIndex = data.indexOf("densities");
@@ -168,9 +167,7 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
     }
   }
 
-  /// executing shell commands
-
-  {
+  function Signature() {
     exec(
       "cd uploads && ./keytool -printcert -jarfile test.apk ",
       (a, values, c) => {
@@ -178,4 +175,17 @@ exec("cd uploads && ./aapt2 dump badging test.apk ", (a, b, c) => {
       }
     );
   }
+
+AppName();
+MinSDKVersion()
+versionName()
+versionCode()
+PackageName()
+TargetSdkVersion()
+SupportScreensizes()
+SupportedScreenDensities()
+Features()
+Permissions()
+Signature()
 });
+
