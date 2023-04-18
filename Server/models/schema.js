@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-  authId: { type: String, required: true },
+  authId: { type: String, index:true,required: true },
   application_Name: { type: String },
   minsdkVersion: { type: String },
   versionName: { type: String },
