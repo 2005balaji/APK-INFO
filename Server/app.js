@@ -8,19 +8,19 @@ app.use(cors());
 
 const data = mongoose.model("apkdetails", schema);
 
-app.get("/apkinfo", (req, res) => {
-  data
-    .find()
-    .then((data) => res.json(data))
-    .catch((err) => console.log(err));
+// app.get("/apkinfo", (req, res) => {
+//   data
+//     .find()
+//     .then((data) => res.json(data))
+//     .catch((err) => console.log(err));
+// });
+
+
+
+app.get("/", (req, res) => {
+  
+  res.send("Hey Welcome to the APK INFO! {apkinfo.tech} . This is a test endpoint!")
 });
-
-
-
-app.get("/test", (req, res) => {
-  res.send("Hey There this is test endpoind")
-});
-
 
 app.get("/apkinfo/:authId", (req, res) => {
   const { authId } = req.params;
