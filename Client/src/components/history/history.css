@@ -56,6 +56,12 @@ th {
   border-bottom: 1px solid var(--shady-ashborder);
 }
 
+
+.bottomborders:hover{
+  border-bottom: 1.5px solid var(--pure-black);
+  background-color: red;
+}
+
 #actionTabs {
   display: flex;
   align-items: center;
@@ -129,3 +135,5 @@ th {
     margin-top: 3vh;
   }
 }
+
+

@@ -28,9 +28,8 @@
   cursor: pointer;
 }
 
-#dndbutton:hover{
+#dndbutton:hover {
   color: var(--pure-black);
-
 }
 #minilabel {
   margin-bottom: 5px;
@@ -60,23 +59,17 @@
   top: 50%;
   left: 50%;
   width: 100vw;
-  transform: translate(-50%, -50%);}
+  transform: translate(-50%, -50%);
+}
 
 @media screen and (max-width: 450px) {
-   .dnd{
+  .dnd {
     padding: 11vh 15vw;
-   }
   }
-
-
-
- 
-
-  @media (max-width: 480px) {
-    
-.uploadwindow {
-  margin-top: 8vh;
 }
-  
-  } 
-  
+
+@media (max-width: 480px) {
+  .uploadwindow {
+    margin-top: 8vh;
+  }
+}
