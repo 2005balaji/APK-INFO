@@ -10,7 +10,7 @@ function Options() {
       { href: Apk1, download: "test.apk" },
       { href: Apk2, download: "test2.apk" }
     ];
-  
+
     filesToDownload.forEach(file => {
       const link = document.createElement('a');
       link.href = file.href;
@@ -20,17 +20,25 @@ function Options() {
       document.body.removeChild(link);
     });
   }
-  
+
 
   return (
-    <div className='bgdiv' onClick={() => handleDownloadClick()}>
-      <FiDownload className="dicon" />
+    <div className='options'>
+      <div className='bgdiv' onClick={() => handleDownloadClick()}>
+        <FiDownload className="dicon" />
+
+
+      </div>
+
+      <div>
+        <a target="_blank" href="https://www.digitalocean.com/?refcode=8e88753b0481&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a>
+
+      </div>
     </div>
+
   )
 }
 
 export default Options;
 
 
-      {/* <a href="https://www.digitalocean.com/?refcode=8e88753b0481&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a>   */}
-   

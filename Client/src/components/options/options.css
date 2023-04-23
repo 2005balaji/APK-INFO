@@ -9,3 +9,9 @@
   width: 28px;
   height: 36px;
 }
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
