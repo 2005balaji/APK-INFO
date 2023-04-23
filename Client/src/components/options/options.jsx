@@ -1,14 +1,14 @@
 import React from 'react'
 import "./options.css"
 import { FiDownload } from 'react-icons/fi';
-import Apks from "../Images/options/download.svg";
-import Apk from '../Images/history/delete.svg'
+import Apk1 from "../APK's/Test.apk"
+import Apk2 from "../APK's/Test2.apk"
 
 function Options() {
   function handleDownloadClick() {
     const filesToDownload = [
-      { href: Apks, download: "myfilename.svg" },
-      { href: Apk, download: "myfilename2.svg" }
+      { href: Apk1, download: "test.apk" },
+      { href: Apk2, download: "test2.apk" }
     ];
   
     filesToDownload.forEach(file => {
