@@ -7,10 +7,13 @@
 
   /* margin-right: 36rem; */
 }
-
+.bgdiv:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.048)
+}
 .dicon {
-  width: 28px;
-  height: 36px;
+  width: 30px;
+    height: 38px;
 }
 
 .options {

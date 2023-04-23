@@ -65,7 +65,7 @@ function History(props) {
                 </tr>
               </thead>
               <tbody>
-                {apkinfo.map((item, i) => {
+                {apkinfo.reverse().map((item, i) => {
                   let itemname = item.application_Name;
                   let logDate = item.date;
                   if (itemname !== undefined) {
