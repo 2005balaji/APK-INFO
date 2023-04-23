@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Historydetails from "./components/historydetails/historydetails";
 import { useAuth0 } from "@auth0/auth0-react";
+import Options from "./components/options/options";
 
 function App() {
   const [apkinfo, setApkinfo] = useState({});
@@ -61,6 +62,8 @@ function App() {
 
           {/* <Details /> */}
         </Routes>
+
+        <Options/>
       </Auth0Provider>
     </BrowserRouter>
   );

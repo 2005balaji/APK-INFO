@@ -1,0 +1,11 @@
+.bgdiv {
+  width: 40px;
+  height: 40px;
+  background: var(--shady-purple);
+  border-radius: 4px;
+}
+
+.dicon {
+  width: 28px;
+  height: 36px;
+}
