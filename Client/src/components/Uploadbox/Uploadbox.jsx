@@ -95,7 +95,7 @@ function Uploadbox(props) {
               <VscCloudUpload id="cloudlogo" />
               <p id="minilabel">Drag & drop to upload</p>
               <label>
-                {socket && <div {...getInputProps()} />}
+                {socket && <input {...getInputProps()} />}
                 <p id="dndbutton">or browse</p>
               </label>
 
