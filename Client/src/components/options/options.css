@@ -3,7 +3,9 @@
   height: 40px;
   background: var(--shady-purple);
   border-radius: 4px;
-  margin-right: 36rem;
+  font-family: "Inter", Helvetica;
+
+  /* margin-right: 36rem; */
 }
 
 .dicon {
@@ -12,9 +14,10 @@
 }
 
 .options {
+  margin-top: 8px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px;
-
+font-size: 14px;
 }

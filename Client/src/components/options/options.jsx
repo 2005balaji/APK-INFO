@@ -25,13 +25,13 @@ function Options() {
   return (
     <div className='options'>
       <div className='bgdiv' onClick={() => handleDownloadClick()}>
-        <FiDownload className="dicon" />
+        <FiDownload className="dicon" /> Test APK
 
 
       </div>
 
       <div >
-        <a target="_blank" href="https://www.digitalocean.com/?refcode=8e88753b0481&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a>
+        {/* <a target="_blank" href="https://www.digitalocean.com/?refcode=8e88753b0481&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a> */}
 
       </div>
     </div>
