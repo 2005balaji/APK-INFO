@@ -10,7 +10,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Historydetails from "./components/historydetails/historydetails";
 import { useAuth0 } from "@auth0/auth0-react";
-import Options from "./components/options/options";
 
 function App() {
   const [apkinfo, setApkinfo] = useState({});
@@ -22,7 +21,7 @@ function App() {
 
   const [login, setLogin] = useState(false);
 
-  return (
+  return (<div className="homediv">
     <BrowserRouter>
 
       <Auth0Provider
@@ -35,11 +34,12 @@ function App() {
         <Navbar setLogin={setLogin} />
 
         <Routes>
-          {login ? (
+          {login ? (<>
             <Route
               path="/"
               element={<Uploadbox apkinfo={apkinfo} setApkinfo={setApkinfo} />}
             />
+          </>
           ) : (
             <Route path="/" element={<Bodytext />} />
           )}
@@ -62,10 +62,10 @@ function App() {
 
           {/* <Details /> */}
         </Routes>
-
-        <Options/>
       </Auth0Provider>
     </BrowserRouter>
+
+  </div>
   );
 }
 

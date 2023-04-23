@@ -7,12 +7,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "./Uploadbox.css";
 import { VscCloudUpload } from "react-icons/vsc";
 import { useDropzone } from "react-dropzone";
-
-
-
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Options from "../options/options";
 
 
 export const ApkDetails = React.createContext();
@@ -105,6 +102,9 @@ function Uploadbox(props) {
               <p id="format">.apk format only</p>
             </div>
           </div>
+
+        <Options/>
+
         </div>
       )}
 
