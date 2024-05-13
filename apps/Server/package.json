@@ -20,7 +20,7 @@
     "socketio-file-upload": "^0.7.3"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "browserslist": {
     "production": [
