@@ -34,3 +34,12 @@ yarn-error.log*
 
 # ui
 dist/
+apps/Client/amplify/cli.json
+apps/Client/amplify/README.md
+apps/Client/amplify/team-provider-info.json
+apps/Client/amplify/.config/project-config.json
+apps/Client/amplify/backend/backend-config.json
+apps/Client/amplify/backend/tags.json
+apps/Client/amplify/backend/auth/client819a1619/cli-inputs.json
+apps/Client/amplify/backend/types/amplify-dependent-resources-ref.d.ts
+apps/Client/amplify/hooks/README.md

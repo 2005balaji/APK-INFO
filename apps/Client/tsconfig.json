@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "module": "commonjs"
+    "module": "commonjs",
+    "esModuleInterop": true // Add this line
   },
   "exclude": ["node_modules"]
 }
