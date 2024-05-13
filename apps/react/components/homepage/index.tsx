@@ -1,4 +1,4 @@
-import { BeakerIcon, LockClosedIcon } from "@heroicons/react/16/solid";
+import { LockClosedIcon } from "@heroicons/react/16/solid";
 import React from "react";
 
 const HomePage: React.FC = () => {
@@ -12,12 +12,27 @@ const HomePage: React.FC = () => {
             id="logo"
           />
         </div>
-        <span id="navspan">How to use?</span>
+        <div className="flex items-center justify-center gap-8">
+          <span id="navspan">Whats happens?</span>
 
-        <button className="getStartedlogin">
-          <LockClosedIcon />
-          Authenticate
-        </button>
+          <button className="getStartedlogin flex gap-2">
+            <LockClosedIcon className=" h-5 w-5" />
+            Authenticate
+          </button>
+        </div>
+
+        <div
+          id="hometext"
+          style={{ fontFamily: "Inter, Helvetica", fontWeight: "bolder" }}
+        >
+          <div id="centertext">
+            Get the inside scoop on all your favourite Android apps!
+          </div>
+
+          <button className=" mt-4 bg-black text-white font-inter font-semibold text-lg leading-6 rounded-sm px-9 py-3 cursor-pointer">
+            Get Started
+          </button>
+        </div>
       </header>
     </>
   );

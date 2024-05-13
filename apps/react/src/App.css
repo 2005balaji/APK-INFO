@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #root {
   margin: 0 auto;
   text-align: center;
@@ -438,11 +442,9 @@ th {
   line-height: normal;
   padding: 15px 24px;
   cursor: pointer;
+  font-weight: 550;
 }
 
-.getStartedlogin:hover {
-  font-weight: 600;
-}
 #profiledpdiv {
   display: grid;
   gap: 35px;
