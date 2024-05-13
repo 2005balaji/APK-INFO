@@ -1,7 +1,9 @@
 import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
 
 import { type AuthUser } from "aws-amplify/auth";
+import "@aws-amplify/ui-react/styles.css";
+
+// components
 import { type UseAuthenticator } from "@aws-amplify/ui-react-core";
 
 type AppProps = {
@@ -9,12 +11,26 @@ type AppProps = {
   user?: AuthUser;
 };
 
-const App: React.FC<AppProps> = ({ signOut, user }) => {
+// make a component
+// eslint-disable-next-line react-refresh/only-export-components
+const HomePage = () => {
   return (
-    <div>
+    <>
+      <p className="text-2xl text-red-500">Home Page</p>
+    </>
+  );
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+const App: React.FC<AppProps> = ({ user, signOut }) => {
+  console.log(user);
+  return (
+    <>
       <Heading level={1}>Hello {user?.signInDetails?.loginId}</Heading>
       <Button onClick={signOut}>Sign out</Button>
-    </div>
+
+      <HomePage />
+    </>
   );
 };
 
