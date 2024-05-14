@@ -1,22 +1,28 @@
 import { useAuthenticator } from "@aws-amplify/ui-react-core";
 import { LockClosedIcon } from "@heroicons/react/16/solid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Auth from "../../middleware/auth";
+import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
-  const { authStatus, signOut, user } = useAuthenticator((context) => [
+  const navigate = useNavigate();
+
+  const { authStatus, isPending } = useAuthenticator((context) => [
     context.user,
   ]);
+
+  useEffect(() => {
+    // if the user is already authenticated, redirect to the app
+    if (authStatus == "authenticated" && !isPending) {
+      navigate("/app");
+    }
+    // eslint-disable-next-line
+  }, [authStatus, isPending]);
 
   const [openModal, setOpenModal] = useState(false);
 
   const handleAuthentication = () => {
     setOpenModal(true);
-  };
-
-  const handleSignOut = () => {
-    setOpenModal(false);
-    signOut();
   };
 
   if (!openModal && authStatus == "unauthenticated") {
@@ -54,16 +60,6 @@ const HomePage: React.FC = () => {
     );
   }
 
-  if (authStatus == "authenticated") {
-    return (
-      <div>
-        <div>Welcome, {user?.username}</div>
-        {/* sign out */}
-        <button onClick={handleSignOut}>Sign Out</button>
-      </div>
-    );
-  }
-
   if (authStatus == "unauthenticated" && openModal) {
     return (
       <div>
@@ -72,11 +68,9 @@ const HomePage: React.FC = () => {
     );
   }
 
-  return (
-    <div>
-      <div>Loading..</div>
-    </div>
-  );
+  if (authStatus == "configuring") {
+    return <div>Loading...</div>;
+  }
 };
 
 export default HomePage;
