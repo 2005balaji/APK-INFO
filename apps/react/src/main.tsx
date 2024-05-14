@@ -7,6 +7,7 @@ import amplifyconfig from "./amplifyconfiguration.json";
 import Navbar from "../components/navbar/navbar";
 import "./App.css";
 import HomePage from "../components/homepage/index";
+import Auth from "../middleware/auth";
 Amplify.configure(amplifyconfig);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

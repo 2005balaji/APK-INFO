@@ -1,9 +1,26 @@
+import { useAuthenticator } from "@aws-amplify/ui-react-core";
 import { LockClosedIcon } from "@heroicons/react/16/solid";
-import React from "react";
+import React, { useState } from "react";
+import Auth from "../../middleware/auth";
 
 const HomePage: React.FC = () => {
-  return (
-    <>
+  const { authStatus, signOut, user } = useAuthenticator((context) => [
+    context.user,
+  ]);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleAuthentication = () => {
+    setOpenModal(true);
+  };
+
+  const handleSignOut = () => {
+    setOpenModal(false);
+    signOut();
+  };
+
+  if (!openModal && authStatus == "unauthenticated") {
+    return (
       <header className="headerdiv" id="headerdiv">
         <div className="header1" id="header1">
           <img
@@ -13,14 +30,18 @@ const HomePage: React.FC = () => {
           />
         </div>
         <div className="flex items-center justify-center gap-8">
-          <span id="navspan">Whats happens?</span>
+          <span id="navspan">What happens?</span>
 
-          <button className="getStartedlogin flex gap-2">
+          <button
+            className=" bg-black text-white font-inter font-semibold text-lg leading-6 rounded-sm px-6 py-3 cursor-pointer flex gap-2"
+            onClick={handleAuthentication}
+          >
             <LockClosedIcon className=" h-5 w-5" />
             Authenticate
           </button>
         </div>
 
+        {/* body */}
         <div
           id="hometext"
           style={{ fontFamily: "Inter, Helvetica", fontWeight: "bolder" }}
@@ -28,13 +49,33 @@ const HomePage: React.FC = () => {
           <div id="centertext">
             Get the inside scoop on all your favourite Android apps!
           </div>
-
-          <button className=" mt-4 bg-black text-white font-inter font-semibold text-lg leading-6 rounded-sm px-9 py-3 cursor-pointer">
-            Get Started
-          </button>
         </div>
       </header>
-    </>
+    );
+  }
+
+  if (authStatus == "authenticated") {
+    return (
+      <div>
+        <div>Welcome, {user?.username}</div>
+        {/* sign out */}
+        <button onClick={handleSignOut}>Sign Out</button>
+      </div>
+    );
+  }
+
+  if (authStatus == "unauthenticated" && openModal) {
+    return (
+      <div>
+        <Auth />
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div>Loading..</div>
+    </div>
   );
 };
 
