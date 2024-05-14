@@ -7,7 +7,7 @@ import "./App.css";
 import HomePage from "../components/homepage/index";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./error-page";
+import ErrorPage from "./routes/error-page";
 
 import App from "./routes/App";
 

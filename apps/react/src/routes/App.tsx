@@ -1,16 +1,18 @@
-import { useAuthenticator } from "@aws-amplify/ui-react-core";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+// AWS
+import { useAuthenticator } from "@aws-amplify/ui-react-core";
+
+// components
+import UploadBox from "../../components/uploadbox";
+
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
+
   const { signOut, authStatus, isPending } = useAuthenticator((context) => [
     context.user,
   ]);
-
-  const handleSignOut = () => {
-    signOut();
-  };
 
   useEffect(() => {
     // if the user is already authenticated, redirect to the app
@@ -19,6 +21,10 @@ const Navbar: React.FC = () => {
     }
   }, [authStatus, isPending, navigate]);
 
+  // helper
+  const handleSignOut = () => {
+    signOut();
+  };
   return (
     <>
       <header className=" p-2 flex justify-between items-center bg-white flex-wrap top-0">
@@ -37,6 +43,8 @@ const Navbar: React.FC = () => {
           Sign Out
         </button>
       </header>
+
+      <UploadBox />
     </>
   );
 };
