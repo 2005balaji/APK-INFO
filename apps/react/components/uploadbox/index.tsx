@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Androidrobot from "../Images/androidrobot.gif";
 import "./Uploadbox.css";
@@ -14,7 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 // import socketIOClient from "socket.io-client";
 import { useAuthenticator } from "@aws-amplify/ui-react-core";
 
-function Uploadbox(props) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function Uploadbox(props: unknown) {
   const notify = () =>
     toast.error("Only APK files are allowed", {
       position: "bottom-right",
@@ -27,11 +27,15 @@ function Uploadbox(props) {
       theme: "light",
     });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { authStatus } = useAuthenticator((context) => [context.user]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [socket, setSocket] = useState(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false); // Add loading state
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -42,7 +46,8 @@ function Uploadbox(props) {
   //   );
   // }, []);
 
-  const handleFileSelect = (file) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleFileSelect = (file: unknown) => {
     // setLoading(true); // Set loading state to true
     // const message = user.sub;
     // const data = {
@@ -58,9 +63,11 @@ function Uploadbox(props) {
   };
 
   const onDrop = useCallback(
-    (acceptedFiles) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (acceptedFiles: any[]) => {
       let filetype;
-      acceptedFiles.forEach((file) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      acceptedFiles.forEach((file: { type: any }) => {
         filetype = file.type;
       });
 
@@ -73,6 +80,7 @@ function Uploadbox(props) {
     [socket]
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
