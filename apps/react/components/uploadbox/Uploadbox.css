@@ -1,0 +1,75 @@
+.labeltxt {
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 40px;
+  font-family: "rubik";
+}
+
+/*  */
+
+#cloudlogo {
+  height: 150px;
+  width: 150px;
+}
+
+#format {
+  font-family: "Inter", Helvetica;
+
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+#dndbutton {
+  font-family: "Inter";
+  color: #2daae9;
+  font-weight: 10;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+#dndbutton:hover {
+  color: var(--pure-black);
+}
+#minilabel {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.dnd {
+  box-sizing: border-box;
+  background: var(--pure-white);
+  border: 5px dashed var(--shady-ashborder);
+  width: 100%;
+  height: 92%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 11vh 24vw;
+}
+
+.uploadwindow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 450px) {
+  .dnd {
+    padding: 11vh 15vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .uploadwindow {
+    margin-top: 8vh;
+  }
+}
