@@ -13,6 +13,9 @@ import "react-toastify/dist/ReactToastify.css";
 // import socketIOClient from "socket.io-client";
 import { useAuthenticator } from "@aws-amplify/ui-react-core";
 
+//
+import { uploadData } from "aws-amplify/storage";
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Uploadbox(props: unknown) {
   const notify = () =>
@@ -46,25 +49,34 @@ function Uploadbox(props: unknown) {
   //   );
   // }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleFileSelect = (file: unknown) => {
-    // setLoading(true); // Set loading state to true
-    // const message = user.sub;
-    // const data = {
-    //   file: file,
-    //   authId: message,
-    // };
-    // socket.emit("upload", data);
-    // socket.on("data", (apkdatas) => {
-    //   props.setApkinfo({ ...apkdatas });
-    //   navigate("/details");
-    //   setLoading(false); // Set loading state to false when data is received
-    // });
+  const handleFileSelect = async (file: File) => {
+    try {
+      const result = await uploadData({
+        // Alternatively, path: ({identityId}) => `protected/${identityId}/album/2024/1.jpg`
+        path: `picture-submissions/${file.name}`,
+        data: file,
+        options: {
+          onProgress: ({ transferredBytes, totalBytes }) => {
+            if (totalBytes) {
+              console.log(
+                `Upload progress ${Math.round(
+                  (transferredBytes / totalBytes) * 100
+                )} %`
+              );
+            }
+          },
+        },
+      }).result;
+
+      console.log("Path from Response: ", result.path);
+    } catch (error) {
+      console.log("Error : ", error);
+    }
   };
 
   const onDrop = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (acceptedFiles: any[]) => {
+    (acceptedFiles: File[]) => {
       let filetype;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       acceptedFiles.forEach((file: { type: any }) => {
@@ -77,7 +89,7 @@ function Uploadbox(props: unknown) {
         handleFileSelect(acceptedFiles[0]);
       }
     },
-    [socket]
+    []
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
