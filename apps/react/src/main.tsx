@@ -12,6 +12,8 @@ import ErrorPage from "./routes/error-page";
 import App from "./routes/App";
 import Temp from "./routes/temp";
 import Details from "./routes/details";
+import History from "./routes/history";
+import { NONDetails } from "../components/composables/index";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +31,20 @@ const router = createBrowserRouter([
   },
   {
     path: "/details",
-    element: <Details />,
+    children: [
+      {
+        index: true,
+        element: <NONDetails />,
+      },
+      {
+        path: "*",
+        element: <Details />,
+      },
+    ],
+  },
+  {
+    path: "/history",
+    element: <History />,
   },
 ]);
 

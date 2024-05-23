@@ -32,12 +32,18 @@ const Head: React.FC = () => {
           />
         </div>
 
-        <button
-          onClick={handleSignOut}
-          className="text-white bg-black cursor-pointer font-semibold text-lg hover:text-blue-300 px-5 py-2"
-        >
-          Sign Out
-        </button>
+        <div className="flex flex-row justify-between gap-12 items-center">
+          <div className="text-black font-semibold text-lg hover:text-green-600 cursor-pointer">
+            My Logs
+          </div>
+
+          <button
+            onClick={handleSignOut}
+            className="text-white bg-black cursor-pointer font-semibold text-lg hover:text-red-700 px-5 py-2"
+          >
+            Sign Out
+          </button>
+        </div>
       </header>
     </>
   );

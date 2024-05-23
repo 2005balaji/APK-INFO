@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthenticator } from "@aws-amplify/ui-react-core";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"; // ES Modules imort
+import { LoadingText } from "../composables";
 
 const key = import.meta.env.VITE_S3_ACCESSID as string;
 const secret = import.meta.env.VITE_S3_SECRETKEY as string;
@@ -21,8 +22,7 @@ const client = new S3Client({
   },
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function Uploadbox(props: unknown) {
+function Core(props: { user: { userId: string } }) {
   const notify = () =>
     toast.error("Only APK files are allowed", {
       position: "bottom-right",
@@ -36,7 +36,6 @@ function Uploadbox(props: unknown) {
     });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { authStatus, user } = useAuthenticator((context) => [context.user]);
 
   const [loading, setLoading] = useState(false); // Add loading state
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,29 +45,24 @@ function Uploadbox(props: unknown) {
     try {
       setLoading(true);
 
-      // const path = `${user.userId}/${Date.now()}-${file.name}`;
+      const path = `${props.user.userId}/${Date.now()}-${file.name}`;
 
-      // const command = new PutObjectCommand({
-      //   Bucket: bucket,
-      //   Key: path,
-      //   Body: file,
-      //   ContentType: file.type,
-      //   Metadata: {
-      //     "x-amz-meta-userid": user.userId,
-      //     "x-amz-meta-filename": file.name,
-      //     "x-amz-meta-filetype": file.type,
-      //   },
-      //   BucketKeyEnabled: true,
-      // });
+      const command = new PutObjectCommand({
+        Bucket: bucket,
+        Key: path,
+        Body: file,
+        ContentType: file.type,
+        Metadata: {
+          "x-amz-meta-userid": props.user.userId,
+          "x-amz-meta-filename": file.name,
+          "x-amz-meta-filetype": file.type,
+        },
+        BucketKeyEnabled: true,
+      });
 
-      // const response = await client.send(command);
+      await client.send(command);
 
-      // console.log(response);
-
-      // aftere 3 seconds, navigate to the next page
-      setTimeout(() => {
-        navigate("/temp");
-      }, 3000);
+      navigate("/details/" + path);
 
       return;
     } catch (err) {
@@ -102,7 +96,7 @@ function Uploadbox(props: unknown) {
         <div id="loader1">
           <img src={Androidrobot} id="androidbot" alt="" />
           <p id="analyzing">
-            Analyzing your file<span className="loader__dot">.</span>
+            Uploading your file<span className="loader__dot">.</span>
             <span className="loader__dot">..</span>
           </p>
         </div>
@@ -124,7 +118,6 @@ function Uploadbox(props: unknown) {
               <p id="format">.apk format only</p>
             </div>
           </div>
-          {/* <Options /> */}
         </div>
       )}
 
@@ -140,6 +133,20 @@ function Uploadbox(props: unknown) {
         theme="light"
       />
     </>
+  );
+}
+
+function Uploadbox() {
+  const { authStatus, user } = useAuthenticator((context) => [context.user]);
+
+  return (
+    <div>
+      {authStatus === "authenticated" ? (
+        <Core user={{ userId: user?.username }} />
+      ) : (
+        <LoadingText text={"Kindly wait while we authenticate you"} />
+      )}
+    </div>
   );
 }
 
