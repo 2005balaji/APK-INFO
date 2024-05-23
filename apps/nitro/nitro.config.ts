@@ -6,8 +6,10 @@ export default defineNitroConfig({
       port: 6969,
     }),
   ],
-  experimental: {
-    websocket: true
+  runtimeConfig: {
+    viteS3Accessid: "",
+    viteS3Secretkey: "",
+    viteS3BucketName: "",
   },
   srcDir: "server"
 

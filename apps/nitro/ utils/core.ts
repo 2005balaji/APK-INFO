@@ -1,10 +1,8 @@
 import { exec } from "child_process";
 
 const commands = {
-  aaptDump: "cd resources && ./aapt2 dump badging ",
+  aaptDump: "aapt2 dump badging ",
   deleter: "cd resources && rm ",
-  aaptPermission: "cd resources && ./aapt2 dump permissions ",
-  keytoolDump: "cd resources && keytool -printcert -jarfile "
 } as const
 
 function runAapt(applicationName: unknown) {

@@ -10,7 +10,9 @@
     "nitropack": "latest"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.582.0",
+    "aws-sdk": "^2.1626.0",
     "nitro-port-module": "0.1.0",
-    "uploadthing": "^6.10.4"
+    "zod": "^3.23.8"
   }
 }
