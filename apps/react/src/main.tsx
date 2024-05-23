@@ -11,6 +11,7 @@ import ErrorPage from "./routes/error-page";
 
 import App from "./routes/App";
 import Temp from "./routes/temp";
+import Details from "./routes/details";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/temp",
     element: <Temp />,
+  },
+  {
+    path: "/details",
+    element: <Details />,
   },
 ]);
 

@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react-core";
+import { useNavigate } from "react-router-dom";
 
-const Navbar: React.FC = () => {
-  // const navigate = useNavigate();
+const Head: React.FC = () => {
+  const navigate = useNavigate();
 
-  const { user, isPending, authStatus } = useAuthenticator((context) => [
-    context.route,
+  const { signOut, authStatus, isPending } = useAuthenticator((context) => [
+    context.user,
   ]);
 
-  console.log(au);
+  useEffect(() => {
+    // if the user is already authenticated, redirect to the app
+    if (authStatus === "unauthenticated") {
+      navigate("/");
+    }
+  }, [authStatus, isPending, navigate]);
+
+  // helper
+  const handleSignOut = () => {
+    signOut();
+  };
+
   return (
     <>
       <header className=" p-2 flex justify-between items-center bg-white flex-wrap top-0">
@@ -20,12 +32,15 @@ const Navbar: React.FC = () => {
           />
         </div>
 
-        <span className="text-black cursor-pointer font-semibold text-lg hover:text-blue-500">
-          How to use?
-        </span>
+        <button
+          onClick={handleSignOut}
+          className="text-white bg-black cursor-pointer font-semibold text-lg hover:text-blue-300 px-5 py-2"
+        >
+          Sign Out
+        </button>
       </header>
     </>
   );
 };
 
-export default Navbar;
+export default Head;

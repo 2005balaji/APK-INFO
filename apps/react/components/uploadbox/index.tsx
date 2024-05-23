@@ -1,25 +1,13 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Androidrobot from "../Images/androidrobot.gif";
-import { uploadData } from "aws-amplify/storage";
 import "./Uploadbox.css";
 import { VscCloudUpload } from "react-icons/vsc";
 import { useDropzone } from "react-dropzone";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Options from "../options/options";
-
-//
-
-// import socketIOClient from "socket.io-client";
-
 import { useAuthenticator } from "@aws-amplify/ui-react-core";
-import React from "react";
-import {
-  S3Client,
-  ListObjectsCommand,
-  PutObjectCommand,
-} from "@aws-sdk/client-s3"; // ES Modules imort
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"; // ES Modules imort
 
 const key = import.meta.env.VITE_S3_ACCESSID as string;
 const secret = import.meta.env.VITE_S3_SECRETKEY as string;
@@ -50,53 +38,58 @@ function Uploadbox(props: unknown) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { authStatus, user } = useAuthenticator((context) => [context.user]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [socket, setSocket] = useState(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false); // Add loading state
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
 
   const handleFileSelect = async (file: File) => {
     try {
-      // const writeobject =
+      setLoading(true);
 
-      const command = new PutObjectCommand({
-        Bucket: bucket,
-        Key: file.name,
-        Body: file,
-        ContentType: file.type,
-      });
+      // const path = `${user.userId}/${Date.now()}-${file.name}`;
 
-      const response = await client.send(command);
+      // const command = new PutObjectCommand({
+      //   Bucket: bucket,
+      //   Key: path,
+      //   Body: file,
+      //   ContentType: file.type,
+      //   Metadata: {
+      //     "x-amz-meta-userid": user.userId,
+      //     "x-amz-meta-filename": file.name,
+      //     "x-amz-meta-filetype": file.type,
+      //   },
+      //   BucketKeyEnabled: true,
+      // });
 
-      console.log(response);
+      // const response = await client.send(command);
+
+      // console.log(response);
+
+      // aftere 3 seconds, navigate to the next page
+      setTimeout(() => {
+        navigate("/temp");
+      }, 3000);
+
+      return;
     } catch (err) {
       console.log(err);
     }
   };
 
-  const onDrop = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (acceptedFiles: any[]) => {
-      let filetype;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      acceptedFiles.forEach((file: { type: any }) => {
-        filetype = file.type;
-      });
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    let filetype;
+    acceptedFiles.forEach((file) => {
+      filetype = file.type;
+    });
 
-      if (filetype != "application/vnd.android.package-archive") {
-        notify();
-      } else {
-        handleFileSelect(acceptedFiles[0]);
-      }
-    },
-    [socket]
-  );
+    if (filetype != "application/vnd.android.package-archive") {
+      notify();
+    } else {
+      handleFileSelect(acceptedFiles[0]);
+    }
+  }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
       "apk/file": [".apk"],
@@ -124,7 +117,7 @@ function Uploadbox(props: unknown) {
               <VscCloudUpload id="cloudlogo" />
               <p id="minilabel">Drag & drop to upload</p>
               <label>
-                {socket && <input {...getInputProps()} />}
+                <input {...getInputProps()} />
                 <p id="dndbutton">or browse</p>
               </label>
 

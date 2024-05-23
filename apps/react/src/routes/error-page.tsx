@@ -194,7 +194,7 @@ export default function ErrorPage() {
         <h1 className="text-4xl font-bold mb-4">Oops!</h1>
         <p className="text-lgmb-2">Sorry, an unexpected error has occurred.</p>
         <p className="text-sm ">
-          <i>{error.statusText || error.message}</i>
+          <i>Page Not Found</i>
         </p>
       </div>
     </BackgroundGradientAnimation>
