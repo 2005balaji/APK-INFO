@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Androidrobot from "../Images/androidrobot.gif";
+import { uploadData } from "aws-amplify/storage";
 import "./Uploadbox.css";
 import { VscCloudUpload } from "react-icons/vsc";
 import { useDropzone } from "react-dropzone";
@@ -11,7 +12,26 @@ import "react-toastify/dist/ReactToastify.css";
 //
 
 // import socketIOClient from "socket.io-client";
+
 import { useAuthenticator } from "@aws-amplify/ui-react-core";
+import React from "react";
+import {
+  S3Client,
+  ListObjectsCommand,
+  PutObjectCommand,
+} from "@aws-sdk/client-s3"; // ES Modules imort
+
+const key = import.meta.env.VITE_S3_ACCESSID as string;
+const secret = import.meta.env.VITE_S3_SECRETKEY as string;
+const bucket = import.meta.env.VITE_S3_BUCKET_NAME as string;
+
+const client = new S3Client({
+  region: "us-east-1",
+  credentials: {
+    accessKeyId: key,
+    secretAccessKey: secret,
+  },
+});
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Uploadbox(props: unknown) {
@@ -28,7 +48,7 @@ function Uploadbox(props: unknown) {
     });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { authStatus } = useAuthenticator((context) => [context.user]);
+  const { authStatus, user } = useAuthenticator((context) => [context.user]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [socket, setSocket] = useState(null);
@@ -38,28 +58,23 @@ function Uploadbox(props: unknown) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setSocket(
-  //     socketIOClient(process.env.REACT_APP_SERVER_SOCKET_URL, {
-  //       transports: ["websocket"],
-  //     })
-  //   );
-  // }, []);
+  const handleFileSelect = async (file: File) => {
+    try {
+      // const writeobject =
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleFileSelect = (file: unknown) => {
-    // setLoading(true); // Set loading state to true
-    // const message = user.sub;
-    // const data = {
-    //   file: file,
-    //   authId: message,
-    // };
-    // socket.emit("upload", data);
-    // socket.on("data", (apkdatas) => {
-    //   props.setApkinfo({ ...apkdatas });
-    //   navigate("/details");
-    //   setLoading(false); // Set loading state to false when data is received
-    // });
+      const command = new PutObjectCommand({
+        Bucket: bucket,
+        Key: file.name,
+        Body: file,
+        ContentType: file.type,
+      });
+
+      const response = await client.send(command);
+
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onDrop = useCallback(
@@ -116,7 +131,6 @@ function Uploadbox(props: unknown) {
               <p id="format">.apk format only</p>
             </div>
           </div>
-
           {/* <Options /> */}
         </div>
       )}
