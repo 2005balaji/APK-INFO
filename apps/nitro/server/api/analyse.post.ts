@@ -1,6 +1,8 @@
 import { z } from 'zod'
 import { AWS_S3_COMPOSABLES } from '~~/composables/s3'
 import fs from 'fs'
+import { runCore } from '~~/ utils/core'
+import { unWrapPath } from '~~/ utils/unwrap'
 
 export default defineEventHandler(async event => {
   const body = await readValidatedBody(event, z.object({
@@ -20,9 +22,16 @@ export default defineEventHandler(async event => {
 
   // console.log(file)
 
-  console.log(useRuntimeConfig(event))
 
-  // the file is an apk save it to file system via fs module
-  return
+  const app = unWrapPath(body.data.s3Path)
+
+  const res = await runCore(app.name)
+
+  return {
+    status: 200,
+    body:
+      res
+  }
+
 })
 
