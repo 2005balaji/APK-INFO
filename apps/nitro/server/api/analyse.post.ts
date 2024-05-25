@@ -1,10 +1,9 @@
 import { z } from 'zod'
 import { AWS_S3_COMPOSABLES } from '~~/composables/s3'
-import fs from 'fs'
 import { runCore } from '~~/ utils/core'
-import { unWrapPath } from '~~/ utils/unwrap'
 
 export default defineEventHandler(async event => {
+
   const body = await readValidatedBody(event, z.object({
     s3Path: z.string(),
   }).safeParse)
@@ -16,16 +15,12 @@ export default defineEventHandler(async event => {
     })
   }
 
-  // const file = await (await AWS_S3_COMPOSABLES()).downloadFile({
-  //   path: body.data.s3Path,
-  // })
-
-  // console.log(file)
+  const file = await (await AWS_S3_COMPOSABLES()).downloadFile({
+    path: body.data.s3Path,
+  })
 
 
-  const app = unWrapPath(body.data.s3Path)
-
-  const res = await runCore(app.name)
+  const res = await runCore(file)
 
   return {
     status: 200,

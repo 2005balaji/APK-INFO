@@ -1,4 +1,7 @@
 import nitroPort from "nitro-port-module";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default defineNitroConfig({
   modules: [
@@ -7,9 +10,9 @@ export default defineNitroConfig({
     }),
   ],
   runtimeConfig: {
-    viteS3Accessid: "",
-    viteS3Secretkey: "",
-    viteS3BucketName: "",
+    viteS3Accessid: process.env.NITRO_VITE_S3_ACCESSID,
+    viteS3Secretkey: process.env.NITRO_VITE_S3_SECRETKEY,
+    viteS3BucketName: process.env.NITRO_VITE_S3_BUCKET_NAME,
   },
   srcDir: "server"
 
