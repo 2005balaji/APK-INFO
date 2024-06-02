@@ -1,0 +1,11 @@
+**/Dockerfile
+**/node_modules
+.vscode
+.git
+.github
+.devcontainer
+**/.output
+**/.nuxt
+*.md
+!README*.md
+.env
