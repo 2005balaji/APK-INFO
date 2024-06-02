@@ -1,5 +1,5 @@
-import Table from "../../../components/details/Table";
-import Head from "../../../components/navbar/navbar";
+import Table from "@components/details/Table";
+import Head from "@components/navbar";
 
 function Details() {
   return (
