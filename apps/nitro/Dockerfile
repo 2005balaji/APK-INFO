@@ -1,11 +1,21 @@
 FROM node:18-bullseye-slim
 
 RUN apt-get update && apt-get install -y 
-
+RUN apt-get install software-properties-common -y
+RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt install aapt -y
+RUN apt-get -y install default-jre
 
 # Set the working directory inside the container
 WORKDIR /app
+
+ARG NITRO_VITE_S3_ACCESSID
+ARG NITRO_VITE_S3_SECRETKEY
+ARG NITRO_VITE_S3_BUCKET_NAME
+
+ENV NITRO_VITE_S3_ACCESSID=${NITRO_VITE_S3_ACCESSID}
+ENV NITRO_VITE_S3_SECRETKEY=${NITRO_VITE_S3_SECRETKEY}
+ENV NITRO_VITE_S3_BUCKET_NAME=${NITRO_VITE_S3_BUCKET_NAME}
 
 # Copy package.json and package-lock.json files to the working directory
 COPY package*.json ./

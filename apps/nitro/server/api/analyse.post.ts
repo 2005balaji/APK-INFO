@@ -19,6 +19,9 @@ export default defineEventHandler(async event => {
     path: body.data.s3Path,
   })
 
+  // const file = `1716483916084-google.apk`
+
+  console.log(file)
 
   const res = await runCore(file)
 

@@ -1,9 +1,11 @@
-Dockerfile
-.dockerignore
 node_modules
-npm-debug.log
-.nitro
 .output
-.git
+.data
+.nitro
+.cache
 dist
-README.md
+
+# Local env files
+.env
+.env.*
+!.env.example
