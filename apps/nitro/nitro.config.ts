@@ -14,6 +14,10 @@ export default defineNitroConfig({
     viteS3Secretkey: process.env.NITRO_VITE_S3_SECRETKEY,
     viteS3BucketName: process.env.NITRO_VITE_S3_BUCKET_NAME,
   },
-  srcDir: "server"
-
+  srcDir: "server",
+  routeRules: {
+    '/api/**': {
+      cors: true,
+    }
+  }
 });

@@ -3,7 +3,7 @@ import { dataFuntions } from "~~/parser/compiler";
 
 const commands = {
   aaptDump: "cd ./temp && aapt2 dump badging ",
-  deleter: "cd ./temp && rm -rf",
+  deleter: "cd ./temp && rm -rf ",
   aaptPermission: "cd ./temp && aapt2 dump permissions ",
   keytoolDump: "cd ./temp && keytool -printcert -jarfile "
 } as const

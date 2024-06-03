@@ -3,10 +3,12 @@ import { AWS_S3_COMPOSABLES } from '~~/composables/s3'
 import { runCore } from '~~/ utils/core'
 
 export default defineEventHandler(async event => {
+  console.log('Event came with body: ', await readBody(event) || 'No body')
 
-  const body = z.object({
+  const body = await readValidatedBody(event, z.object({
     s3Path: z.string(),
-  }).safeParse(await JSON.parse(await readBody(event)))
+  }).safeParse)
+
   if (!body.success) {
     console.error('Invalid body', body.error)
     throw createError({
