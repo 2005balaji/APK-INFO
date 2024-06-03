@@ -62,6 +62,8 @@ export const runKeytool = async (applicationName: unknown) => {
   return stdout;
 }
 
+
+
 export const runCore = async (a: string) => {
   const res = await runAapt(a)
 
@@ -78,7 +80,7 @@ export const runCore = async (a: string) => {
   return {
     ...data,
     permissions,
-    keytool
+    signature: keytool
   }
 
 }

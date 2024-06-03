@@ -23,6 +23,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './'),
       '@components': path.resolve(__dirname, 'components'),
+      '@models': path.resolve(__dirname, 'models'),
     },
   },
 

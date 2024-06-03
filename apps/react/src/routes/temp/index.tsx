@@ -1,6 +1,8 @@
 import { useAuthenticator } from "@aws-amplify/ui-react-core";
 import React from "react";
 import { S3Client, ListObjectsCommand } from "@aws-sdk/client-s3"; // ES Modules imort
+import { Button } from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router-dom";
 
 const key = import.meta.env.VITE_S3_ACCESSID as string;
 const secret = import.meta.env.VITE_S3_SECRETKEY as string;
@@ -25,30 +27,17 @@ function Temp() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { authStatus, user } = useAuthenticator((context) => [context.user]);
 
+  const navigate = useNavigate();
+
   const uploadData = async (data: unknown) => {
     console.log(data);
+    navigate("/details/balaji");
   };
 
   return (
     <div>
-      <div
-        style={{
-          backgroundColor: "#fff",
-          color: "#000",
-        }}
-      >
-        Input
-        <input
-          type="file"
-          accept=".apk"
-          onChange={(e) => {
-            if (e.target.files && e.target.files.length > 0) {
-              const file = e.target.files[0];
-              uploadData(file);
-            }
-          }}
-        />
-      </div>
+      Hi
+      <Button onClick={() => uploadData(response)}>Upload</Button>
     </div>
   );
 }

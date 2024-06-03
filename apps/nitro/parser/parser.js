@@ -137,26 +137,6 @@ function funcFeatures(data) {
   }
 }
 
-async function funcPermissions(applicationName) {
-  function permission(applicationName) {
-    return new Promise((resolve, reject) => {
-      exec(commands.aaptPermission + applicationName, (error, stdout) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(stdout.toString());
-        }
-      });
-    });
-  }
-  try {
-    const permissions = await permission(applicationName);
-    return permissions;
-  } catch (error) {
-    console.error("error", error);
-  }
-}
-
 function funcLanguages(data) {
   let startIndex = data.indexOf("locales:") + 8;
 
@@ -167,26 +147,6 @@ function funcLanguages(data) {
     return name;
   } else {
     console.log("Languages not found in data.");
-  }
-}
-
-async function funcSignature(applicationName) {
-  function signatures(applicationName) {
-    return new Promise((resolve, reject) => {
-      exec(commands.keytoolDump + applicationName, (error, stdout) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(stdout.toString());
-        }
-      });
-    });
-  }
-  try {
-    const signature_s = await signatures(applicationName);
-    return signature_s;
-  } catch (error) {
-    console.error("error", error);
   }
 }
 
@@ -201,6 +161,4 @@ export {
   funcSupportScreensizes,
   funcSupportedScreenDensities,
   funcFeatures,
-  funcPermissions,
-  funcSignature,
 };

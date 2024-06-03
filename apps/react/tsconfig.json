@@ -28,7 +28,8 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@models/*": ["models/*"]
     }
   },
   "include": ["src"],

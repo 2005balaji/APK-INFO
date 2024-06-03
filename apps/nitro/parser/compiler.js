@@ -9,8 +9,6 @@ import {
   funcSupportScreensizes,
   funcSupportedScreenDensities,
   funcFeatures,
-  funcPermissions,
-  funcSignature,
 } from "./parser";
 
 function currentDate() {
@@ -40,8 +38,6 @@ export async function dataFuntions(data, id, applicationName) {
   const supportedScreendensities = funcSupportedScreenDensities(data);
   const features = funcFeatures(data);
   const languages = funcLanguages(data);
-  // const permissions = await funcPermissions(applicationName);
-  // const signatures = await funcSignature(applicationName);
   const date = currentDate();
 
   const info = {
@@ -56,8 +52,6 @@ export async function dataFuntions(data, id, applicationName) {
     supportedScreendensities,
     features,
     languages,
-    // permissions,
-    // signatures,
     date,
   };
 

@@ -1,20 +1,7 @@
+import { AppData } from "@models/index";
 import React from "react";
 
-export type ApkInfo = {
-  application_Name: string;
-  minsdkVersion: string;
-  targetSdkVersion: string;
-  versionName: string;
-  versionCode: string;
-  supportScreensizes: string;
-  supportedScreendensities: string;
-  features: string;
-  permissions: string;
-  languages: string;
-  signatures: string;
-};
-
-function details({ apkinfo }: { apkinfo: ApkInfo }) {
+function details({ apkinfo }: { apkinfo: AppData }) {
   return (
     <>
       <div id="details outerdiv">
