@@ -1,0 +1,10 @@
+{
+  "resourceName": "crud",
+  "tableName": "crud",
+  "partitionKey": {
+    "fieldName": "test",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
