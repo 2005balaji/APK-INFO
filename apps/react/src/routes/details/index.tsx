@@ -14,32 +14,30 @@ function Details() {
     "*": string;
   };
 
-  const getData = async () => {
-    try {
-      const res = await axios.post(
-        analyseApi,
-        {
-          s3Path:
-            "d4388448-d0a1-70e4-a061-a00e70a2494d/1716483916084-google.apk",
-        },
-        {
-          headers: {
-            "Content-Type": "text/plain",
-          },
-          method: "POST",
-          insecureHTTPParser: true,
-        }
-      );
-
-      const data = appData.parse(res.data.body);
-
-      setApp(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axios.post(
+          analyseApi,
+          {
+            s3Path: params,
+          },
+          {
+            headers: {
+              "Content-Type": "text/plain",
+            },
+            method: "POST",
+            insecureHTTPParser: true,
+          }
+        );
+
+        const data = appData.parse(res.data.body);
+
+        setApp(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     getData();
   }, [params]);
 

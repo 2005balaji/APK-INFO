@@ -12,6 +12,7 @@ export const appData = z.object({
   versionCode: z.string().nullish(),
   supportScreensizes: z.string().nullish(),
   versionName: z.string().nullish(),
+  signature: z.string().nullish(),
 });
 
 export type AppData = z.infer<typeof appData>;

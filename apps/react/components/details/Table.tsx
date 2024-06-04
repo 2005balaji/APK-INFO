@@ -69,7 +69,7 @@ function details({ apkinfo }: { apkinfo: AppData }) {
               <tr>
                 <td id="tableborder">Signature</td>
                 <td id="tableborder" className="overflow">
-                  {apkinfo.signatures}
+                  {apkinfo.signature}
                 </td>
               </tr>
             </tbody>
