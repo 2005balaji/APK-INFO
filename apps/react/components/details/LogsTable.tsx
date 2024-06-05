@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Loading from "../../components/Images/loading/docload.gif";
 import { TrashIcon as DeleteIcon } from "@heroicons/react/24/solid";
 import { useAuthenticator } from "@aws-amplify/ui-react-core";
+import { post } from "aws-amplify/api";
 
 function LoadingText() {
   return (
@@ -22,8 +23,33 @@ function History() {
   const [apkinfo, setApkinfo] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  async function postTodo() {
+    try {
+      const restOperation = post({
+        apiName: "crud",
+        path: "/crud",
 
+        options: {
+          body: {
+            message: "Mow the lawn  dude",
+          },
+        },
+      });
+
+      console.log("POST call initiated");
+
+      console.log(await restOperation);
+      const { body } = await restOperation.response;
+      const response = await body.json();
+
+      console.log("POST call succeeded");
+      console.log(response);
+    } catch (e) {
+      console.log("POST call failed: ", JSON.parse(e.response.body));
+    }
+  }
   useEffect(() => {
+    postTodo();
     if (user) {
       fetch(`google.com` + "/")
         .then((res) => res.json())
